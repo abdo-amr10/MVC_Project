@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Demo.DAL.Persistence.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250317144240_DepartmentMigration")]
-    partial class DepartmentMigration
+    [Migration("20250317153323_DepartmentModuleMigration")]
+    partial class DepartmentModuleMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

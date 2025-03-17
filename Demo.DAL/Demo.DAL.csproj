@@ -9,7 +9,7 @@
   <ItemGroup>
     <Folder Include="Data\DataSeeds\" />
     <Folder Include="Data\Migrations\" />
-    <Folder Include="Repositories\" />
+    <Folder Include="Persistence\Data\Migrations\" />
     <Folder Include="Persistence\" />
   </ItemGroup>
 
