@@ -7,12 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Configurations\" />
     <Folder Include="Data\DataSeeds\" />
     <Folder Include="Data\Migrations\" />
-    <Folder Include="Entities\" />
     <Folder Include="Repositories\" />
     <Folder Include="Persistence\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.14">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
