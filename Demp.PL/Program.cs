@@ -1,3 +1,7 @@
+using Demo.DAL.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+
 namespace Demp.PL
 {
     public class Program
@@ -8,6 +12,10 @@ namespace Demp.PL
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<ApplicationDbContext>((OptionBuilder) =>
+            {
+                OptionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefualtConnection"));
+            });
 
             var app = builder.Build();
 
