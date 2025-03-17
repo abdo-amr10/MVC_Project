@@ -1,4 +1,5 @@
 using Demo.DAL.Data;
+using Demo.DAL.Repositories.Departments;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -16,6 +17,8 @@ namespace Demp.PL
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            builder.Services.AddScoped<IDepartmentRopsitory, DepartmentRepository>();
 
             var app = builder.Build();
 

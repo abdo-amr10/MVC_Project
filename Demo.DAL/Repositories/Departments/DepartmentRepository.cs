@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Demo.DAL.Repositories.Departments
 {
-    internal class DepartmentRepository : IDepartmentRopsitory
+    public class DepartmentRepository : IDepartmentRopsitory
     {
         private readonly ApplicationDbContext _dbContext;
 
@@ -22,6 +22,10 @@ namespace Demo.DAL.Repositories.Departments
             if(withNoTraking)
                 return _dbContext.Departments.AsNoTracking().ToList();
             return _dbContext.Departments.ToList();
+        }
+        public IQueryable<Department> GetAllAsQueryable()
+        {
+            return _dbContext.Departments;
         }
         public Department? Get(int id)
         {
@@ -45,8 +49,6 @@ namespace Demo.DAL.Repositories.Departments
             return _dbContext.SaveChanges();
         }
 
-       
-       
-        
+      
     }
 }

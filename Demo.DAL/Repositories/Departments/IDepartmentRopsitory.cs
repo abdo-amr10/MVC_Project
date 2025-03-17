@@ -11,6 +11,7 @@ namespace Demo.DAL.Repositories.Departments
     {
         Department? Get(int id);
         IEnumerable<Department> GetAll(bool withNoTraking = true);
+        IQueryable<Department> GetAllAsQueryable();
         int Add (Department entity);
         int Update (Department entity);
         int Delete (Department entity);
