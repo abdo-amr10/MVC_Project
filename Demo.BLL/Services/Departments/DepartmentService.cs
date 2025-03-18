@@ -9,7 +9,7 @@ using Demo.DAL.Repositories.Departments;
 
 namespace Demo.BLL.Services.Departments
 {
-    internal class DepartmentService : IDepartmentService
+    public class DepartmentService : IDepartmentService
     {
         private readonly IDepartmentRopsitory _departmentRopsitory;
 
