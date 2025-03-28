@@ -3,21 +3,22 @@ using Demo.BLL.Services.Departments;
 using Demo.DAL.Entities.Departments;
 using Demp.PL.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Demp.PL.Controllers
 {
     public class DepartmentController : Controller
     {
         private readonly IDepartmentService _departmentService;
-        private readonly ILogger<DepartmentController> _loggeer;
+        private readonly ILogger<DepartmentController> _logger;
         private readonly IWebHostEnvironment _environment;
 
         public DepartmentController(IDepartmentService departmentService,
-            ILogger<DepartmentController> loggeer,
+            ILogger<DepartmentController> logger,
             IWebHostEnvironment environment)
         {
             _departmentService = departmentService;
-            _loggeer = loggeer;
+            _logger = logger;
             _environment = environment;
         }
         [HttpGet]
@@ -59,7 +60,7 @@ namespace Demp.PL.Controllers
             catch (Exception ex)
             {
 
-                _loggeer.LogError(ex, ex.Message);
+                _logger.LogError(ex, ex.Message);
 
                 message = _environment.IsDevelopment() ? ex.Message : "Department Is Not Created.";
 
@@ -108,7 +109,7 @@ namespace Demp.PL.Controllers
         {
             if (!ModelState.IsValid)
                 return View(departmentVM);
-            var message = String.Empty;
+            var message = string.Empty;
             try
             {
                 var departmentToUpdate = new UpdatedDepartmentDto()
@@ -131,7 +132,7 @@ namespace Demp.PL.Controllers
             catch (Exception ex)
             {
 
-                _loggeer.LogError(ex, ex.Message);
+                _logger.LogError(ex, ex.Message);
 
                 message = _environment.IsDevelopment() ? ex.Message: "An Error Occurred During Updating Department.";
             }
@@ -140,6 +141,42 @@ namespace Demp.PL.Controllers
             return View(departmentVM);
         }
 
-        
+        [HttpGet]
+        public IActionResult Delete(int? id)
+        {
+            if (!id.HasValue)
+                return BadRequest();
+
+            var department = _departmentService.GetDepartmentById(id.Value);
+
+            if (department == null)
+                return NotFound();
+
+            return View(department);
+        }
+
+        [HttpPost]
+        public IActionResult Delete([FromRoute] int id)
+        {
+            var message = string.Empty;
+
+            try
+            {
+                var deleted = _departmentService.DeleteDepartment(id);
+
+                if (deleted)
+                    return RedirectToAction(nameof(Index));
+
+                message = "An Error Occurred During Deleting This Department :(";
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+
+                message = _environment.IsDevelopment() ? ex.Message : "An Error Occurred During Deleting This Department :(";
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

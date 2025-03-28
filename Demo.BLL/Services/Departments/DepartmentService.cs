@@ -30,11 +30,11 @@ namespace Demo.BLL.Services.Departments
             return departments;
         }
 
-        public DepartmentDetailsToReturnDto? GetDepartmentById(int id)
+        public DepartmentDetailsDto? GetDepartmentById(int id)
         {
             var departments =_departmentRopsitory.Get(id);
             if (departments != null)
-                return new DepartmentDetailsToReturnDto()
+                return new DepartmentDetailsDto()
                 {
                     Id = departments.Id,
                     Name = departments.Name,

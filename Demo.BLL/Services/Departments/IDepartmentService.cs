@@ -11,7 +11,7 @@ namespace Demo.BLL.Services.Departments
     public interface IDepartmentService
     {
         IEnumerable<DepartmentToReturnDto> GetAllDepartment();
-        DepartmentDetailsToReturnDto? GetDepartmentById(int id);
+        DepartmentDetailsDto? GetDepartmentById(int id);
         int CreateDepartment(CreatedDepartmentDto departmentDto);
         int UpdateDepartment(UpdatedDepartmentDto departmentDto);
         bool DeleteDepartment(int id);
