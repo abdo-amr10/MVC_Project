@@ -11,9 +11,9 @@ namespace Demo.BLL.Services.Departments
 {
     public class DepartmentService : IDepartmentService
     {
-        private readonly IDepartmentRopsitory _departmentRopsitory;
+        private readonly IDepartmentRepository _departmentRopsitory;
 
-        public DepartmentService(IDepartmentRopsitory departmentRopsitory)
+        public DepartmentService(IDepartmentRepository departmentRopsitory)
         {
             _departmentRopsitory = departmentRopsitory;
         }
