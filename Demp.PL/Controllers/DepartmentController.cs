@@ -1,4 +1,5 @@
 ﻿using Demo.BLL.DTOs;
+using Demo.BLL.DTOs.DepartmentDTOs;
 using Demo.BLL.Services.Departments;
 using Demo.DAL.Entities.Departments;
 using Demp.PL.ViewModels;
