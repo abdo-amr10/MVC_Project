@@ -24,7 +24,7 @@ namespace Demo.DAL.Data.Migrations
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    HirringDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    HiringDate = table.Column<DateOnly>(type: "date", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EmployeeType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),

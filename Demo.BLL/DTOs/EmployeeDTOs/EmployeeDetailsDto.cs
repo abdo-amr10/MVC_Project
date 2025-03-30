@@ -31,7 +31,7 @@ namespace Demo.BLL.DTOs.EmployeeDTOs
         [Phone]
         public string? PhoneNumber { get; set; }
 
-        [Display(Name = "Hirring Date")]
+        [Display(Name = "Hiring Date")]
         public DateOnly HiringDate { get; set; }
         public Gender Gender { get; set; }
 

@@ -101,7 +101,7 @@ namespace Demo.DAL.Persistence.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("HirringDate")
+                    b.Property<DateOnly>("HiringDate")
                         .HasColumnType("date");
 
                     b.Property<bool>("IsActive")

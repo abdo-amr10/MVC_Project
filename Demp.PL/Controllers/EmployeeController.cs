@@ -1,7 +1,9 @@
 ﻿using Demo.BLL.DTOs;
 using Demo.BLL.DTOs.EmployeeDTOs;
 using Demo.BLL.Services.Employees;
+using Demo.DAL.Entities.Departments;
 using Demo.DAL.Entities.Employees;
+using Demo.DAL.Enums;
 using Demp.PL.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -45,6 +47,7 @@ namespace Demp.PL.Controllers
 
             try
             {
+
                 var result = _employeeService.CreateEmployee(employee);
 
                 if (result > 0)
