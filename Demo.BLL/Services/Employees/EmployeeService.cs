@@ -51,7 +51,8 @@ namespace Demo.BLL.Services.Employees
 
         public IEnumerable<EmployeeDto> GetAllEmployee()
         {
-            var employee = _employeeRepository.GetAllAsQueryable()
+            var employee = _employeeRepository.GetIQueryable()
+                                              .Where(e=>!e.IsDeleted)
                                               .Select(employee => new EmployeeDto()
                                               {
                                                   Id = employee.Id,

@@ -12,7 +12,7 @@ namespace Demo.DAL.Repositories._Generic
     {
         T? Get(int id);
         IEnumerable<T> GetAll(bool withNoTraking = true);
-        IQueryable<T> GetAllAsQueryable();
+        IQueryable<T> GetIQueryable();
         int Add(T entity);
         int Update(T entity);
         int Delete(T entity);

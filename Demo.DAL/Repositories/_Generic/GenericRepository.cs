@@ -24,7 +24,7 @@ namespace Demo.DAL.Repositories._Generic
                 return _dbContext.Set<T>().AsNoTracking().ToList();
             return _dbContext.Set<T>().ToList();
         }
-        public IQueryable<T> GetAllAsQueryable()
+        public IQueryable<T> GetIQueryable()
         {
             return _dbContext.Set<T>();
         }
@@ -41,12 +41,16 @@ namespace Demo.DAL.Repositories._Generic
 
         public int Update(T entity)
         {
+            Console.WriteLine($"Updating entity: {entity.Id}");
+            Console.WriteLine($"New Description: {(entity is Department d ? d.Description : "N/A")}");
+
             _dbContext.Set<T>().Update(entity);
             return _dbContext.SaveChanges();
         }
         public int Delete(T entity)
         {
-            _dbContext.Set<T>().Remove(entity);
+            entity.IsDeleted = true;
+            _dbContext.Set<T>().Update(entity);
             return _dbContext.SaveChanges();
         }
     }

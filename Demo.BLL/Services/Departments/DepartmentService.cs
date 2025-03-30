@@ -21,7 +21,10 @@ namespace Demo.BLL.Services.Departments
 
         public IEnumerable<DepartmentDto> GetAllDepartment()
         {
-            var departments = _departmentRepository.GetAllAsQueryable().Select(x => new DepartmentDto
+            var departments = _departmentRepository
+                              .GetIQueryable()
+                              .Where(d=>!d.IsDeleted)
+                              .Select(x => new DepartmentDto
             {
                 Id = x.Id,
                 Name = x.Name,
@@ -68,18 +71,21 @@ namespace Demo.BLL.Services.Departments
         }
         public int UpdateDepartment(UpdatedDepartmentDto departmentDto)
         {
-            var updatedDepartment = new Department()
-            {
-                Id = departmentDto.Id,
-                Name = departmentDto.Name,
-                Code = departmentDto.Code,
-                CreationDate = departmentDto.CreationDate,
-                CreatedBy = 1,
-                LastModifiedBy = 1,
-                LastModifiedOn = DateTime.Now,
-            };
-            return _departmentRepository.Update(updatedDepartment);
+            var department = _departmentRepository.Get(departmentDto.Id);
+
+            if (department == null)
+                return 0; 
+
+            department.Name = departmentDto.Name;
+            department.Code = departmentDto.Code;
+            department.Description = departmentDto.Description ?? department.Description; 
+            department.CreationDate = departmentDto.CreationDate;
+            department.LastModifiedBy = 1;
+            department.LastModifiedOn = DateTime.Now;
+
+            return _departmentRepository.Update(department);
         }
+
 
         public bool DeleteDepartment(int id)
         {

@@ -110,13 +110,15 @@ namespace Demp.PL.Controllers
         {
             if (!ModelState.IsValid)
                 return View(departmentVM);
+
             var message = string.Empty;
+
             try
             {
                 var departmentToUpdate = new UpdatedDepartmentDto()
                 {
                     Id = id,
-                    Code= departmentVM.Code,
+                    Code = departmentVM.Code,
                     Name = departmentVM.Name,
                     Description = departmentVM.Description,
                     CreationDate = departmentVM.CreationDate,
@@ -127,15 +129,12 @@ namespace Demp.PL.Controllers
                 if (Updated)
                     return RedirectToAction(nameof(Index));
 
-                message = "An error occured during updating department";
-                
+                message = "An Error Occurred During Updating Department";
             }
             catch (Exception ex)
             {
-
                 _logger.LogError(ex, ex.Message);
-
-                message = _environment.IsDevelopment() ? ex.Message: "An Error Occurred During Updating Department.";
+                message = _environment.IsDevelopment() ? ex.Message : "An Error Occurred During Updating Department.";
             }
 
             ModelState.AddModelError(string.Empty, message);
