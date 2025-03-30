@@ -1,3 +1,11 @@
+using Demo.BLL.Services.Departments;
+using Demo.BLL.Services.Employees;
+using Demo.DAL.Data;
+using Demo.DAL.Repositories.Departments;
+using Demo.DAL.Repositories.Employees;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+
 namespace Demp.PL
 {
     public class Program
@@ -8,6 +16,15 @@ namespace Demp.PL
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
             var app = builder.Build();
 
