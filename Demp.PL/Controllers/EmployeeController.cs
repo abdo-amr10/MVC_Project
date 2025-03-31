@@ -37,6 +37,7 @@ namespace Demp.PL.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(CreatedEmployeeDto employee)
         {
             if (!ModelState.IsValid)
@@ -115,6 +116,7 @@ namespace Demp.PL.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Edit([FromRoute] int id , UpdatedEmployeeDto employee)
         {
             if (!ModelState.IsValid)
@@ -159,6 +161,7 @@ namespace Demp.PL.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Delete([FromRoute] int id)
         {
             var message = string.Empty;
