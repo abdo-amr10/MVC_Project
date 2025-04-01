@@ -100,7 +100,7 @@ namespace Demp.PL.Controllers
             if (employee == null)
                 return NotFound();
 
-            return View( new UpdatedEmployeeDto()
+            return View( new CreatedEmployeeDto()
             {
                 Name = employee.Name,
                 Age = employee.Age,

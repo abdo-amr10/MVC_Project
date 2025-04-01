@@ -2,7 +2,7 @@
 
 namespace Demp.PL.ViewModels
 {
-    public class DepartmentEditViewModel
+    public class DepartmentViewModel
     {
 
         public string Name { get; set; } = null!;
