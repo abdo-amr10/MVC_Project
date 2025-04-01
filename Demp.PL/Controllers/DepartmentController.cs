@@ -31,6 +31,7 @@ namespace Demp.PL.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewBag.Action = "Create";
             return View();
         }
 
@@ -57,15 +58,19 @@ namespace Demp.PL.Controllers
                 var created = _departmentService.CreateDepartment(createdDepartment) >0;
 
                 if (created)
-                    return RedirectToAction(nameof(Index));
-
+                {
+                    TempData["Message"] = "Department is Created Successfully :) !";
+                    
+                }
                 else
                 {
                     message = "Department Is Not Created";
+                    TempData["Message"] = message;
                     ModelState.AddModelError(string.Empty, message);
-                    return View(departmentVM);
+                    //return View(departmentVM);
 
                 }
+                return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
@@ -92,6 +97,7 @@ namespace Demp.PL.Controllers
                 return NotFound();
 
             return View(department);
+
         }
 
         [HttpGet]
@@ -104,6 +110,7 @@ namespace Demp.PL.Controllers
 
             if (department == null)
                 return NotFound();
+            ViewBag.Action = "Edit";
 
             return View( new DepartmentViewModel()
             {
@@ -112,6 +119,7 @@ namespace Demp.PL.Controllers
                 Description = department.Description,
                 CreationDate = department.CreationDate,
             });
+
         }
 
         [HttpPost]
@@ -137,9 +145,12 @@ namespace Demp.PL.Controllers
                 var Updated = _departmentService.UpdateDepartment(departmentToUpdate) > 0;
 
                 if (Updated)
+                {
+                    TempData["Message"] = "Department is Updated Successfully :) !";
                     return RedirectToAction(nameof(Index));
-
+                }
                 message = "An Error Occurred During Updating Department";
+                TempData["Message"] = message;
             }
             catch (Exception ex)
             {
@@ -161,6 +172,8 @@ namespace Demp.PL.Controllers
 
             if (department == null)
                 return NotFound();
+            ViewBag.Action = "Delete";
+
 
             return View(department);
         }
@@ -176,9 +189,12 @@ namespace Demp.PL.Controllers
                 var deleted = _departmentService.DeleteDepartment(id);
 
                 if (deleted)
+                {
+                    TempData["Message"] = "Department is Deleted Successfully !";
                     return RedirectToAction(nameof(Index));
-
+                }
                 message = "An Error Occurred During Deleting This Department :(";
+                TempData["Message"] = message;
             }
             catch (Exception ex)
             {

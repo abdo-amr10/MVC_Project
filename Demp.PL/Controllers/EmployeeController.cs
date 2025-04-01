@@ -33,6 +33,7 @@ namespace Demp.PL.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewBag.Action = "Create";
             return View();
         }
 
@@ -52,11 +53,14 @@ namespace Demp.PL.Controllers
                 var result = _employeeService.CreateEmployee(employee);
 
                 if (result > 0)
+                {
+                    TempData["Message"] = "Department is Created Successfully :) !";
                     return RedirectToAction(nameof(Index));
-
+                }
                 else
                 {
-                    message = "Employee Is Not Created";
+                    message = "Employee Is Not Created!";
+                    TempData["Message"] = message;
                     ModelState.AddModelError(string.Empty, message);
                     return View(employee);
 
@@ -99,6 +103,8 @@ namespace Demp.PL.Controllers
 
             if (employee == null)
                 return NotFound();
+            ViewBag.Action = "Edit";
+
 
             return View( new CreatedEmployeeDto()
             {
@@ -129,10 +135,14 @@ namespace Demp.PL.Controllers
                 var Updated = _employeeService.UpdateEmployee(employee) > 0;
 
                 if (Updated)
+                {
+                    TempData["Message"] = "Department is Updated Successfully :) !";
                     return RedirectToAction(nameof(Index));
+                }
 
                 message = "An error occured during updating Employee";
-                
+                TempData["Message"] = message;
+
             }
             catch (Exception ex)
             {
@@ -156,6 +166,8 @@ namespace Demp.PL.Controllers
 
             if (Employee == null)
                 return NotFound();
+            ViewBag.Action = "Delete";
+
 
             return View(Employee);
         }
@@ -171,15 +183,21 @@ namespace Demp.PL.Controllers
                 var deleted = _employeeService.DeleteEmployee(id);
 
                 if (deleted)
+                {
+                    TempData["Message"] = "Department is Deleted Successfully!";
+
                     return RedirectToAction(nameof(Index));
+                }
 
                 message = "An Error Occurred During Deleting This Employee :(";
+                TempData["Message"] = message;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
 
                 message = _environment.IsDevelopment() ? ex.Message : "An Error Occurred During Deleting This Employee :(";
+
             }
 
             return RedirectToAction(nameof(Index));
