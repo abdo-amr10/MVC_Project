@@ -30,6 +30,8 @@ namespace Demo.BLL.DTOs.EmployeeDTOs
 
         [Phone]
         public string? PhoneNumber { get; set; }
+        public string? Department { get; set; }
+
 
         [Display(Name = "Hiring Date")]
         public DateOnly HiringDate { get; set; }

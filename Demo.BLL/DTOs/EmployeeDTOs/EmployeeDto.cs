@@ -21,6 +21,7 @@ namespace Demo.BLL.DTOs.EmployeeDTOs
         [DataType(DataType.EmailAddress)]
         public string? Email { get; set; }
         public string Gender { get; set; } = null!;
+        public string? Department { get; set; }
 
         [Display(Name = "Employee Type")]
         public string EmployeeType { get; set; } = null!;

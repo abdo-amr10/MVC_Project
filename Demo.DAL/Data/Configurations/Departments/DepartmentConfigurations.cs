@@ -19,6 +19,11 @@ namespace Demo.DAL.Data.Configurations.Departments
             builder.Property(d => d.CreatedOn).HasDefaultValueSql("GETUTCDATE()");
             builder.Property(d => d.LastModifiedOn).HasComputedColumnSql("GETDATE()");
 
+            builder.HasMany(m => m.Employees)
+                   .WithOne(d => d.Department)
+                   .HasForeignKey(d => d.DepartmentId)
+                   .OnDelete(DeleteBehavior.SetNull);
+
         }
     }
 }

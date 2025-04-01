@@ -102,7 +102,10 @@ namespace Demp.PL.Controllers
             var employee = _employeeService.GetEmployeeById(id.Value);
 
             if (employee == null)
+            {
                 return NotFound();
+            }
+
             ViewBag.Action = "Edit";
 
 

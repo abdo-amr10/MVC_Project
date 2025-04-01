@@ -1,4 +1,5 @@
 ﻿@using Demo.BLL.DTOs.EmployeeDTOs
+@using Demo.BLL.Services.Departments
 @using Demo.DAL.Enums
 @model EmployeeDetailsDto
 
@@ -17,7 +18,11 @@
         <div class="row">
             <div class="col-6">
                 <label class="form-label mt-1" asp-for="Name"></label>
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" class="form-control" readonly />
+            </div>
+            <div class="col-6">
+                <label class="form-label mt-1" asp-for="Department"></label>
+                <input asp-for="Department" class="form-control" readonly/>
             </div>
             <div class="col-6 ">
                 <label class="form-label mt-1" asp-for="Email"></label>
@@ -56,6 +61,7 @@
                     </div>
                 }
             </div>
+            
             <div class="col-6 my-2 ">
                 <label class="form-label" asp-for="HiringDate"></label>
                 <input type="date" asp-for="HiringDate" class="form-control " readonly />

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Demo.BLL.DTOs.EmployeeDTOs;
 using Demo.DAL.Entities.Employees;
 using Demo.DAL.Repositories.Employees;
+using Microsoft.EntityFrameworkCore;
 
 namespace Demo.BLL.Services.Employees
 {
@@ -30,8 +31,10 @@ namespace Demo.BLL.Services.Employees
                 Email = employeeDto.Email,
                 PhoneNumber = employeeDto.PhoneNumber,
                 HiringDate = employeeDto.HiringDate,
+                DepartmentId = employeeDto.DepartmentId,
                 Gender = employeeDto.Gender,
                 EmployeeType = employeeDto.EmployeeType,
+                CreatedOn = DateTime.UtcNow,
                 CreatedBy = 1, 
                 LastModifiedBy = 1,
                 LastModifiedOn = DateTime.UtcNow,
@@ -53,6 +56,7 @@ namespace Demo.BLL.Services.Employees
         {
             var employee = _employeeRepository.GetIQueryable()
                                               .Where(e=>!e.IsDeleted)
+                                              .Include(d=>d.Department)
                                               .Select(employee => new EmployeeDto()
                                               {
                                                   Id = employee.Id,
@@ -61,6 +65,7 @@ namespace Demo.BLL.Services.Employees
                                                   Address = employee.Address,
                                                   IsActive = employee.IsActive,
                                                   Salary = employee.Salary,
+                                                  Department = employee.Department.Name,
                                                   Email = employee.Email,
                                                   Gender = employee.Gender.ToString(),
                                                   EmployeeType = employee.EmployeeType.ToString(),
@@ -70,7 +75,9 @@ namespace Demo.BLL.Services.Employees
 
         public EmployeeDetailsDto? GetEmployeeById(int id)
         {
-            var employee = _employeeRepository.Get(id);
+            var employee = _employeeRepository.GetIQueryable()
+                                     .Include(e => e.Department) 
+                                     .FirstOrDefault(e => e.Id == id);
             if (employee is { })
                 return new EmployeeDetailsDto()
                 {
@@ -81,9 +88,11 @@ namespace Demo.BLL.Services.Employees
                     IsActive = employee.IsActive,
                     Salary = employee.Salary,
                     Email = employee.Email,
+                    Department = employee.Department?.Name??"",
                     PhoneNumber = employee.PhoneNumber,
                     HiringDate = employee.HiringDate,
                     Gender = employee.Gender,
+                    CreatedOn = employee.CreatedOn,
                     EmployeeType = employee.EmployeeType,
 
                 };
@@ -101,13 +110,13 @@ namespace Demo.BLL.Services.Employees
                 IsActive = employeeDto.IsActive,
                 Salary = employeeDto.Salary,
                 Email = employeeDto.Email,
-                PhoneNumber = employeeDto.PhoneNumber,
                 HiringDate = employeeDto.HiringDate,
                 Gender = employeeDto.Gender,
                 EmployeeType = employeeDto.EmployeeType,
+                DepartmentId = employeeDto.DepartmentId,
                 CreatedBy = 1,
                 LastModifiedBy = 1,
-                LastModifiedOn = DateTime.UtcNow,
+                LastModifiedOn = DateTime.UtcNow
             };
             return _employeeRepository.Update(employee);
         }
