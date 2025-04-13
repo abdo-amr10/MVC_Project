@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Contact";
+}
+
+<div class="container mt-5">
+    <div class="card mx-auto" style="max-width: 600px; border-radius: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); background-color: #f8f9fa;">
+        <div class="card-body text-center">
+
+            <!-- Profile Picture Section -->
+            <div style="width: 160px; height: 160px; margin: 0 auto; border-radius: 50%; padding: 5px;
+                        background: linear-gradient(135deg, #0d6efd, #6610f2);
+                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);">
+                <img src="~/imgs/me.jpg"
+                     class="rounded-circle"
+                     style="width: 100%; height: 100%; object-fit: cover; border: 4px solid #fff;"
+                     alt="My Photo" />
+            </div>
+
+            <!-- Name and Title -->
+            <h3 class="card-title mt-3" style="font-weight: 700; color: #333;">Abd El-Rahman Amr</h3>
+            <p class="card-text" style="font-size: 1.2em; color: #555;">Software Engineer - Back-End .NET Developer</p>
+
+            <!-- Contact Information -->
+            <div class="contact-info mt-3">
+                <p class="card-text"><strong>Email:</strong> <a href="mailto:amr838836@gmail.com" style="color: #0d6efd;">amr838836@gmail.com</a></p>
+                <p class="card-text"><strong>Phone:</strong> 0109-035-8431</p>
+            </div>
+
+            <!-- Social Media Links -->
+            <div class="social-links mt-3">
+                <a href="https://linkedin.com/in/abd-el-rahman-amr-3b0a09286" target="_blank" class="btn btn-primary btn-lg" style="border-radius: 25px; padding: 10px 20px; margin: 5px;">
+                    <i class="bi bi-linkedin"></i> LinkedIn Profile
+                </a>
+                <a href="https://github.com/abdo-amr10" target="_blank" class="btn btn-dark btn-lg" style="border-radius: 25px; padding: 10px 20px; margin: 5px;">
+                    <i class="bi bi-github"></i> GitHub Profile
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Add some CSS for smooth hover effects and better alignment -->
+<style>
+    .card {
+        background-color: #f8f9fa;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+    .social-links a:hover {
+        background-color: #0056b3;
+        color: #fff;
+    }
+
+    .social-links a:active {
+        transform: scale(0.98);
+    }
+</style>

@@ -1,4 +1,5 @@
-﻿using Demo.BLL.DTOs;
+﻿using AutoMapper;
+using Demo.BLL.DTOs;
 using Demo.BLL.DTOs.DepartmentDTOs;
 using Demo.BLL.Services.Departments;
 using Demo.DAL.Entities.Departments;
@@ -12,14 +13,17 @@ namespace Demp.PL.Controllers
     {
         private readonly IDepartmentService _departmentService;
         private readonly ILogger<DepartmentController> _logger;
+        private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _environment;
 
         public DepartmentController(IDepartmentService departmentService,
             ILogger<DepartmentController> logger,
+            IMapper mapper,
             IWebHostEnvironment environment)
         {
             _departmentService = departmentService;
             _logger = logger;
+            _mapper = mapper;
             _environment = environment;
         }
         [HttpGet]
@@ -48,13 +52,14 @@ namespace Demp.PL.Controllers
             try
             {
 
-                var createdDepartment = new CreatedDepartmentDto()
-                {
-                    Name = departmentVM.Name,
-                    Code = departmentVM.Code,
-                    CreationDate = departmentVM.CreationDate,
-                    Description = departmentVM.Description,
-                };
+                //var createdDepartment = new CreatedDepartmentDto()
+                //{
+                //    Name = departmentVM.Name,
+                //    Code = departmentVM.Code,
+                //    CreationDate = departmentVM.CreationDate,
+                //    Description = departmentVM.Description,
+                //};
+                var createdDepartment = _mapper.Map<CreatedDepartmentDto>(departmentVM);
                 var created = _departmentService.CreateDepartment(createdDepartment) >0;
 
                 if (created)
@@ -112,14 +117,16 @@ namespace Demp.PL.Controllers
                 return NotFound();
             ViewBag.Action = "Edit";
 
-            return View( new DepartmentViewModel()
-            {
-                Code = department.Code,
-                Name = department.Name,
-                Description = department.Description,
-                CreationDate = department.CreationDate,
-            });
+            var departmentVM = _mapper.Map<DepartmentDetailsDto, DepartmentViewModel>(department);
 
+            //return View( new DepartmentViewModel()
+            //{
+            //    Code = department.Code,
+            //    Name = department.Name,
+            //    Description = department.Description,
+            //    CreationDate = department.CreationDate,
+            //});
+            return View(departmentVM);
         }
 
         [HttpPost]
@@ -133,15 +140,16 @@ namespace Demp.PL.Controllers
 
             try
             {
-                var departmentToUpdate = new UpdatedDepartmentDto()
-                {
-                    Id = id,
-                    Code = departmentVM.Code,
-                    Name = departmentVM.Name,
-                    Description = departmentVM.Description,
-                    CreationDate = departmentVM.CreationDate,
-                };
-
+                //var departmentToUpdate = new UpdatedDepartmentDto()
+                //{
+                //    Id = id,
+                //    Code = departmentVM.Code,
+                //    Name = departmentVM.Name,
+                //    Description = departmentVM.Description,
+                //    CreationDate = departmentVM.CreationDate,
+                //};
+                var departmentToUpdate = _mapper.Map<DepartmentViewModel, UpdatedDepartmentDto>(departmentVM);
+                departmentToUpdate.Id = id;
                 var Updated = _departmentService.UpdateDepartment(departmentToUpdate) > 0;
 
                 if (Updated)

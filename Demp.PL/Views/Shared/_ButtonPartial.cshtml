@@ -2,7 +2,7 @@
 
 <td>
 
-    <a asp-action="Details" asp-route-id="@Model" class="btn btn-warning">
+    <a  asp-action="Details" asp-route-id="@Model" class="btn btn-warning">
         <i class="fas fa-eye"></i> Details
     </a>
 </td>
@@ -14,14 +14,12 @@
 
 
 <td>
-     <a asp-action="Delete" asp-route-id="@Model" class="btn btn-danger">
+    @* <a asp-action="Delete" asp-route-id="@employee.Id" class="btn btn-danger">
                             <i class="fas fa-trash"></i> Delete
-                        </a>
+                        </a> *@
 
     <!-- Button trigger modal -->
-  @*  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
         <i class="fas fa-trash"></i> Delete
-    </button>*@
-
-
+    </button>
 </td>

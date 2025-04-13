@@ -3,6 +3,7 @@ using Demo.BLL.Services.Employees;
 using Demo.DAL.Data;
 using Demo.DAL.Repositories.Departments;
 using Demo.DAL.Repositories.Employees;
+using Demp.PL.Mapping;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -25,14 +26,12 @@ namespace Demp.PL
             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
             builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
-
+            builder.Services.AddAutoMapper(m => m.AddProfile(new MappingProfile()));
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 

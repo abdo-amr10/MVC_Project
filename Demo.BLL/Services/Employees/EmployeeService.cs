@@ -53,10 +53,10 @@ namespace Demo.BLL.Services.Employees
             return false;
         }
 
-        public IEnumerable<EmployeeDto> GetAllEmployee()
+        public IEnumerable<EmployeeDto> GetEmployees(string search)
         {
             var employee = _employeeRepository.GetIQueryable()
-                                              .Where(e=>!e.IsDeleted)
+                                              .Where(e=>!e.IsDeleted && (string.IsNullOrEmpty(search) || e.Name.ToLower().Contains(search.ToLower())))
                                               .Include(d=>d.Department)
                                               .Select(employee => new EmployeeDto()
                                               {

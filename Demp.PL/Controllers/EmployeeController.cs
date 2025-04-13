@@ -1,5 +1,7 @@
-﻿using Demo.BLL.DTOs;
+﻿using AutoMapper;
+using Demo.BLL.DTOs;
 using Demo.BLL.DTOs.EmployeeDTOs;
+using Demo.BLL.Services.Departments;
 using Demo.BLL.Services.Employees;
 using Demo.DAL.Entities.Departments;
 using Demo.DAL.Entities.Employees;
@@ -14,24 +16,28 @@ namespace Demp.PL.Controllers
     {
         private readonly IEmployeeService _employeeService;
         private readonly ILogger<EmployeeController> _logger;
+        private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _environment;
 
         public EmployeeController(IEmployeeService employeeService,
             ILogger<EmployeeController> logger,
+            IMapper mapper,
             IWebHostEnvironment environment)
         {
             _employeeService = employeeService;
             _logger = logger;
+            _mapper = mapper;
             _environment = environment;
         }
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(string search)
         {
-            var Employee = _employeeService.GetAllEmployee();
+            ViewData["Search"] = search;
+            var Employee = _employeeService.GetEmployees( search);
             return View(Employee);
         }
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Create(/*[FromServices] IDepartmentService departmentService*/)
         {
             ViewBag.Action = "Create";
             return View();
