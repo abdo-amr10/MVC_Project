@@ -7,11 +7,14 @@ using Demo.DAL.Entities.Departments;
 using Demo.DAL.Entities.Employees;
 using Demo.DAL.Enums;
 using Demp.PL.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Demp.PL.Controllers
 {
+    [Authorize]
+
     public class EmployeeController : Controller
     {
         private readonly IEmployeeService _employeeService;
@@ -30,10 +33,10 @@ namespace Demp.PL.Controllers
             _environment = environment;
         }
         [HttpGet]
-        public IActionResult Index(string search)
+        public async Task<IActionResult> Index(string search)
         {
             ViewData["Search"] = search;
-            var Employee = _employeeService.GetEmployees( search);
+            var Employee = await _employeeService.GetEmployeesAsync( search);
             return View(Employee);
         }
         [HttpGet]
@@ -45,7 +48,7 @@ namespace Demp.PL.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(CreatedEmployeeDto employee)
+        public async Task<IActionResult> Create(CreatedEmployeeDto employee)
         {
             if (!ModelState.IsValid)
                 return View(employee);
@@ -56,7 +59,7 @@ namespace Demp.PL.Controllers
             try
             {
 
-                var result = _employeeService.CreateEmployee(employee);
+                var result = await _employeeService.CreateEmployeeAsync(employee);
 
                 if (result > 0)
                 {
@@ -86,12 +89,12 @@ namespace Demp.PL.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (!id.HasValue)
                 return BadRequest();
 
-            var Employee = _employeeService.GetEmployeeById(id.Value);
+            var Employee = await _employeeService.GetEmployeeByIdAsync(id.Value);
 
             if (Employee == null)
                 return NotFound();
@@ -100,12 +103,12 @@ namespace Demp.PL.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (!id.HasValue)
                 return BadRequest();
 
-            var employee = _employeeService.GetEmployeeById(id.Value);
+            var employee = await _employeeService.GetEmployeeByIdAsync(id.Value);
 
             if (employee == null)
             {
@@ -132,7 +135,7 @@ namespace Demp.PL.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([FromRoute] int id , UpdatedEmployeeDto employee)
+        public async Task<IActionResult> Edit([FromRoute] int id , UpdatedEmployeeDto employee)
         {
             if (!ModelState.IsValid)
                 return View(employee);
@@ -141,7 +144,7 @@ namespace Demp.PL.Controllers
             {
                 
 
-                var Updated = _employeeService.UpdateEmployee(employee) > 0;
+                var Updated = await _employeeService.UpdateEmployeeAsync(employee) > 0;
 
                 if (Updated)
                 {
@@ -166,12 +169,12 @@ namespace Demp.PL.Controllers
         }
 
         [HttpGet]
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (!id.HasValue)
                 return BadRequest();
 
-            var Employee = _employeeService.GetEmployeeById(id.Value);
+            var Employee = await _employeeService.GetEmployeeByIdAsync(id.Value);
 
             if (Employee == null)
                 return NotFound();
@@ -183,13 +186,13 @@ namespace Demp.PL.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete([FromRoute] int id)
+        public async Task<IActionResult> Delete([FromRoute] int id)
         {
             var message = string.Empty;
 
             try
             {
-                var deleted = _employeeService.DeleteEmployee(id);
+                var deleted = await _employeeService.DeleteEmployeeAsync(id);
 
                 if (deleted)
                 {

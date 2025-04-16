@@ -6,12 +6,12 @@
 @inject IDepartmentService departmentService
 
 @{
-    var Departments = new SelectList(departmentService.GetAllDepartment(),
+    var Departments = new SelectList(await departmentService.GetAllDepartmentsAsync(),
                               nameof(DepartmentDto.Id), 
                               nameof(DepartmentDto.Name));
 }
 
-<form asp-action="@ViewBag.Action" class="row col-6">
+<form asp-action="@ViewBag.Action" class="row col-6" enctype="multipart/form-data" method="post">
 
     <div asp-validation-summary="ModelOnly"></div>
 
@@ -95,6 +95,10 @@
             <input type="checkbox" asp-for="IsActive" class="form-check-input" />
             <label class=" form-check-label" asp-for="IsActive"></label>
         </div>
+    </div>
+    <div class="form-group col-6">
+        <label class="col-form-label" asp-for="Image"></label>
+        <input asp-for="Image" type="file" class="form-control" />
     </div>
 
     @if (ViewBag.Action == "Create")

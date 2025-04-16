@@ -10,11 +10,11 @@ namespace Demo.DAL.Repositories._Generic
 {
     public interface IGenericRepository<T> where T : BaseModel
     {
-        T? Get(int id);
-        IEnumerable<T> GetAll(bool withNoTraking = true);
+        Task<T?> GetAsync(int id);
+        Task<IEnumerable<T>> GetAllAsync(bool withNoTraking = true);
         IQueryable<T> GetIQueryable();
-        int Add(T entity);
-        int Update(T entity);
-        int Delete(T entity);
+        void Add(T entity);
+        void Update(T entity);
+        void Delete(T entity);
     }
 }

@@ -3,6 +3,32 @@
 @using Demo.DAL.Enums
 @model EmployeeDetailsDto
 
+<div class="row justify-content-center align-items-center mb-4">
+    <div class="col-4 text-center">
+        <div class="image-frame">
+            <img src="~/files/images/@(Model.Image != null ? Model.Image : "User.jpg")"
+                 alt="Employee Image"
+                 class="img-fluid shadow-lg"
+                 style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; border: 4px solid #f0f0f0;" />
+        </div>
+    </div>
+</div>
+
+<style>
+    .image-frame {
+        display: inline-block;
+        padding: 5px;
+        background: linear-gradient(45deg, #00BFFF, #ff9966); /* Gradient color for a more modern look */
+        border-radius: 70%;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for a nice depth effect */
+        border: 3px solid #fff; /* White border for contrast */
+    }
+
+    .img-fluid {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Extra shadow for the image */
+    }
+</style>
+
 <ul class="nav nav-tabs" id="employeeTabs" role="tablist">
     <li class="nav-item" role="presentation">
         <a class="nav-link active" id="general-tab" data-bs-toggle="tab" href="#general" role="tab" aria-selected="true">General</a>

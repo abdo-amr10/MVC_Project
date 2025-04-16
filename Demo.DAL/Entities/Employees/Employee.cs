@@ -23,6 +23,6 @@ namespace Demo.DAL.Entities.Employees
         public Gender Gender { get; set; }
         public EmployeeType EmployeeType { get; set; }
         public virtual Department? Department { get; set; }
-
+        public string? Image { get; set; }
     }
 }

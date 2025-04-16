@@ -18,40 +18,36 @@ namespace Demo.DAL.Repositories._Generic
         {
             _dbContext = dbContext;
         }
-        public IEnumerable<T> GetAll(bool withNoTraking = true)
+        public async Task<IEnumerable<T>> GetAllAsync(bool withNoTraking = true)
         {
             if (withNoTraking)
-                return _dbContext.Set<T>().AsNoTracking().ToList();
-            return _dbContext.Set<T>().ToList();
+                return await _dbContext.Set<T>().AsNoTracking().ToListAsync();
+            return await _dbContext.Set<T>().ToListAsync();
         }
         public IQueryable<T> GetIQueryable()
         {
             return _dbContext.Set<T>();
         }
-        public T? Get(int id)
+        public async Task<T?> GetAsync(int id)
         {
-            return _dbContext.Set<T>().Find(id);
+            return await _dbContext.Set<T>().FindAsync(id);
         }
 
-        public int Add(T entity)
-        {
-            _dbContext.Set<T>().Add(entity);
-            return _dbContext.SaveChanges();
-        }
+        public void Add(T entity)=> _dbContext.Set<T>().Add(entity);
 
-        public int Update(T entity)
+        public void Update(T entity)
         {
             Console.WriteLine($"Updating entity: {entity.Id}");
             Console.WriteLine($"New Description: {(entity is Department d ? d.Description : "N/A")}");
 
             _dbContext.Set<T>().Update(entity);
-            return _dbContext.SaveChanges();
+            
         }
-        public int Delete(T entity)
+        public void Delete(T entity)
         {
             entity.IsDeleted = true;
             _dbContext.Set<T>().Update(entity);
-            return _dbContext.SaveChanges();
+         
         }
     }
 }

@@ -38,5 +38,7 @@ namespace Demo.BLL.DTOs.EmployeeDTOs
         public Gender Gender { get; set; }
 
         public EmployeeType EmployeeType { get; set; }
+        public string? Image { get; set; }
+
     }
 }

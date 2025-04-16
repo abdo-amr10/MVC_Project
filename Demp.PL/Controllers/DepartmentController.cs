@@ -4,11 +4,14 @@ using Demo.BLL.DTOs.DepartmentDTOs;
 using Demo.BLL.Services.Departments;
 using Demo.DAL.Entities.Departments;
 using Demp.PL.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Demp.PL.Controllers
 {
+    [Authorize]
+
     public class DepartmentController : Controller
     {
         private readonly IDepartmentService _departmentService;
@@ -27,9 +30,9 @@ namespace Demp.PL.Controllers
             _environment = environment;
         }
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var department = _departmentService.GetAllDepartment();
+            var department = await _departmentService.GetAllDepartmentsAsync();
             return View(department);
         }
         [HttpGet]
@@ -41,7 +44,7 @@ namespace Demp.PL.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(DepartmentViewModel departmentVM)
+        public async Task<IActionResult> Create(DepartmentViewModel departmentVM)
         {
             if (!ModelState.IsValid)
                 return View(departmentVM);
@@ -60,7 +63,7 @@ namespace Demp.PL.Controllers
                 //    Description = departmentVM.Description,
                 //};
                 var createdDepartment = _mapper.Map<CreatedDepartmentDto>(departmentVM);
-                var created = _departmentService.CreateDepartment(createdDepartment) >0;
+                var created = await _departmentService.CreateDepartmentAsync(createdDepartment) >0;
 
                 if (created)
                 {
@@ -91,12 +94,12 @@ namespace Demp.PL.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (!id.HasValue)
                 return BadRequest();
 
-            var department = _departmentService.GetDepartmentById(id.Value);
+            var department = await _departmentService.GetDepartmentByIdAsync(id.Value);
 
             if (department == null)
                 return NotFound();
@@ -106,12 +109,12 @@ namespace Demp.PL.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (!id.HasValue)
                 return BadRequest();
 
-            var department = _departmentService.GetDepartmentById(id.Value);
+            var department = await _departmentService.GetDepartmentByIdAsync(id.Value);
 
             if (department == null)
                 return NotFound();
@@ -131,7 +134,7 @@ namespace Demp.PL.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([FromRoute] int id , DepartmentViewModel departmentVM)
+        public async Task<IActionResult> Edit([FromRoute] int id , DepartmentViewModel departmentVM)
         {
             if (!ModelState.IsValid)
                 return View(departmentVM);
@@ -150,7 +153,7 @@ namespace Demp.PL.Controllers
                 //};
                 var departmentToUpdate = _mapper.Map<DepartmentViewModel, UpdatedDepartmentDto>(departmentVM);
                 departmentToUpdate.Id = id;
-                var Updated = _departmentService.UpdateDepartment(departmentToUpdate) > 0;
+                var Updated = await _departmentService.UpdateDepartmentAsync(departmentToUpdate) > 0;
 
                 if (Updated)
                 {
@@ -171,12 +174,12 @@ namespace Demp.PL.Controllers
         }
 
         [HttpGet]
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (!id.HasValue)
                 return BadRequest();
 
-            var department = _departmentService.GetDepartmentById(id.Value);
+            var department = await _departmentService.GetDepartmentByIdAsync(id.Value);
 
             if (department == null)
                 return NotFound();
@@ -188,13 +191,13 @@ namespace Demp.PL.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete([FromRoute] int id)
+        public async Task<IActionResult> Delete([FromRoute] int id)
         {
             var message = string.Empty;
 
             try
             {
-                var deleted = _departmentService.DeleteDepartment(id);
+                var deleted = await _departmentService.DeleteDepartmentAsync(id);
 
                 if (deleted)
                 {

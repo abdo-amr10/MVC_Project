@@ -25,5 +25,7 @@ namespace Demo.BLL.DTOs.EmployeeDTOs
 
         [Display(Name = "Employee Type")]
         public string EmployeeType { get; set; } = null!;
+        public string? Image { get; set; }
+
     }
 }

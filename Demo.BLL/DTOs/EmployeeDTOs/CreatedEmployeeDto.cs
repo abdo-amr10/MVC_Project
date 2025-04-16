@@ -5,17 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Demo.DAL.Enums;
+using Microsoft.AspNetCore.Http;
 
 namespace Demo.BLL.DTOs.EmployeeDTOs
 {
     public class CreatedEmployeeDto
     {
+
         [Required(ErrorMessage = "Name Is Required")]
         [MaxLength(50, ErrorMessage = "Max Length Of Name Is 50 Chars")]
         [MinLength(3, ErrorMessage = "Min Length Of Name Is 3 Chars")]
         public string Name { get; set; } = null!;
 
-        [Range(22, 30)]
+        [Range(17, 60)]
         public int? Age { get; set; }
 
         [RegularExpression(@"^[0-9]{1,3}-[a-zA-Z]{5,10}-[a-zA-Z]{4,10}-[a-zA-Z]{5,10}$",
@@ -43,5 +45,7 @@ namespace Demo.BLL.DTOs.EmployeeDTOs
 
         [Display(Name = "Department")]
         public int? DepartmentId { get; set; }
+        public IFormFile? Image { get; set; }
+
     }
 }

@@ -1,0 +1,50 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+
+<div class="main-agileinfo">
+	<div class="agileits-top">
+		<div class="logo-section" style="text-align:center; margin-bottom:20px;">
+			<h2 style="color: #fff; margin-top: 10px;">Management System</h2>
+		</div>
+		<br />
+		<form asp-action="Register">
+			<div asp-validation-summary="All"></div>
+			<input class="text" asp-for="FirstName" placeholder="First Name" required />
+			<span asp-validation-for="FirstName" class="text-danger"></span>
+			<br />
+			<input class="text" asp-for="LastName" placeholder="Last Name" required />
+			<span asp-validation-for="LastName" class="text-danger"></span>
+			<br />
+			<input class="text" asp-for="UserName" placeholder="User Name" required />
+			<span asp-validation-for="UserName" class="text-danger"></span>
+			<input class="text email" asp-for="Email" placeholder="Email" required />
+			<span asp-validation-for="Email" class="text-danger"></span>
+
+			<input class="text" asp-for="Password" placeholder="Password" required />
+			<span asp-validation-for="Password" class="text-danger"></span>
+
+
+			<input class="text w3lpass" asp-for="ConfirmPassword" placeholder="Confirm Password" required="">
+			<span asp-validation-for="Password" class="text-danger"></span>
+
+			<div class="wthree-text">
+				<label class="anim">
+					<input type="checkbox" asp-for ="IsAgree" class="checkbox" required="">
+					<span>I Agree To The Terms & Conditions</span>
+				</label>
+				<div class="clear"> </div>
+			</div>
+			<input type="submit" value="SIGNUP">
+		</form>
+		<p>Do you have an Account? <a asp-action="LogIn"> Login Now!</a></p>
+	</div>
+</div>
+
+@section ValidationScript
+{
+	<partial name="_ValidationScriptsPartial" />
+}
