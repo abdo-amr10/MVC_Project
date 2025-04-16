@@ -58,6 +58,7 @@ namespace Demp.PL
             {
                 options.LogoutPath = "/Account/LogIn";
                 options.AccessDeniedPath = "/Home/Error";
+
                 options.LogoutPath = "/Account/LogIn";
             });
             builder.Services.AddTransient<IAttatchmentService, AttatchmentService>();
