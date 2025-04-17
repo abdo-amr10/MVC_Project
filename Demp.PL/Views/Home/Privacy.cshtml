@@ -3,4 +3,28 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+
+
+<div class="container py-5">
+    <div class="text-center mb-4">
+        <h2>Privacy Policy</h2>
+        <p class="text-muted">Your privacy is important to us.</p>
+    </div>
+
+    <div class="card shadow-sm p-4 rounded-4">
+        <h5>What information do we collect?</h5>
+        <p>We collect information that helps us improve your experience such as your name, email address, and usage statistics.</p>
+
+        <h5>How do we use your information?</h5>
+        <p>We use your data to personalize content, provide customer support, and enhance the platform experience.</p>
+
+        <h5>Do we share your information?</h5>
+        <p>No, we do not sell or share your information with third parties without your consent.</p>
+
+        <h5>Your rights</h5>
+        <p>You have the right to request access, correction, or deletion of your personal data at any time.</p>
+
+        <h5>Contact Us</h5>
+        <p>If you have any questions, please visit the <a href="@Url.Action("Contact", "Home")">Contact</a> page.</p>
+    </div>
+</div>

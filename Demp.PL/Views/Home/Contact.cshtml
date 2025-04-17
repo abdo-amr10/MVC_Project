@@ -1,0 +1,81 @@
+﻿@{
+    ViewData["Title"] = "Contact";
+}
+<div class="container text-center mt-5">
+    <h1 class="display-4 mb-4 text-primary fw-bold">Contact Me Now!</h1>
+    <p class="lead mb-5 text-muted">Let’s build something great together.</p>
+ </div>
+
+<div class="container mt-5 mb-5">
+    <div class="card p-4 shadow-lg border-0 rounded-4" style="background-color: #ffffff; max-width: 900px; margin: auto;">
+        <div class="row g-4 align-items-center">
+            <!-- Image on the right -->
+            <div class="col-md-5 order-md-2 text-center">
+                <div class="profile-img-wrapper mx-auto" style="width: 200px; height: 200px; border-radius: 50%;
+                    background: linear-gradient(135deg, #0d6efd, #6610f2);
+                    padding: 5px; box-shadow: 0 6px 15px rgba(0,0,0,0.2);">
+                    <img src="~/imgs/me.jpg"
+                         class="rounded-circle"
+                         style="width: 100%; height: 100%; object-fit: cover; border: 4px solid #fff;"
+                         alt="My Photo" />
+                </div>
+            </div>
+
+            <!-- Info on the left -->
+            <div class="col-md-7 order-md-1">
+                <h2 class="fw-bold text-primary mb-2">Abd El-Rahman Amr</h2>
+                <h5 class="text-muted mb-3">Software Engineer - Back-End .NET Developer</h5>
+
+                <p class="mb-2"><strong>Email:</strong> <a href="mailto:amr838836@gmail.com" class="text-decoration-none text-dark">amr838836@gmail.com</a></p>
+                <p class="mb-4"><strong>Phone:</strong> 0109-035-8431</p>
+
+                <div class="d-flex  gap-3 flex-wrap mt-4">
+                    <a href="https://linkedin.com/in/abd-el-rahman-amr-3b0a09286" target="_blank" class="btn btn-outline-primary px-3 py-2 rounded-pill d-flex align-items-center">
+                        <i class="bi bi-linkedin me-2"></i> LinkedIn
+                    </a>
+                    <a href="https://github.com/abdo-amr10" target="_blank" class="btn btn-outline-dark px-3 py-2 rounded-pill d-flex align-items-center">
+                        <i class="bi bi-github me-2"></i> GitHub
+                    </a>
+                    <a href="https://www.facebook.com/share/16oaV56Xhb/" target="_blank" class="btn btn-outline-primary px-3 py-2 rounded-pill d-flex align-items-center">
+                        <i class="bi bi-facebook me-2"></i> Facebook
+                    </a>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- New Button for CV with the same width as the card -->
+<div class="d-flex justify-content-center mt-4">
+    <a href="https://drive.google.com/file/d/1WSHjSH8keFaZs8IcDDMvRd9gXLTRP89f/view?usp=drive_link" target="_blank" class="btn btn-outline-success px-5 py-3 rounded-pill" style="width: 100%; max-width: 900px;">
+        <i class="bi bi-file-earmark-pdf me-2"></i> View CV
+    </a>
+</div>
+
+<!-- Extra Styling -->
+<style>
+    .card:hover {
+        transform: translateY(-5px);
+        transition: all 0.3s ease;
+    }
+
+    a.btn:hover {
+        opacity: 0.9;
+        transition: 0.3s;
+    }
+
+    .order-md-2 {
+        order: 2 !important;
+    }
+
+    .order-md-1 {
+        order: 1 !important;
+    }
+
+    .profile-img-wrapper {
+        width: 200px !important;
+        height: 200px !important;
+    }
+</style>
